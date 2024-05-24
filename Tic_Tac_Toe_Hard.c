@@ -9,41 +9,32 @@ struct players{
     char opc[20];
 };
 
-void winner(char ttt[9][3],struct players p[2], int *playing){
-    for(int a=0;a<2;){
-        if(strcmp(ttt[0], p[a].opc) == 0 && strcmp(ttt[4], p[a].opc) == 0 && strcmp(ttt[8], p[a].opc) == 0){
-            printf("Jogador: %s venceu!\n",p[a].player);
-            (*playing)=100;
-            a=10;
-        }
-        else{
-            if(strcmp(ttt[2], p[a].opc) == 0 && strcmp(ttt[4], p[a].opc) == 0 && strcmp(ttt[6], p[a].opc) == 0){
-                printf("Jogador: %s venceu!\n",p[a].player);
-                (*playing)=100;
-                a=10;
-            }
-            else{
-                for(int b = 0; b < 3; b++){
-                    if(strcmp(ttt[0+(b*3)], p[a].opc) == 0 && strcmp(ttt[1+(b*3)], p[a].opc) == 0 && strcmp(ttt[2+(b*3)], p[a].opc) == 0){
-                    printf("Jogador: %s venceu!\n",p[a].player);
-                    (*playing)=100;
-                    a=10;
-                    }
-                    else{
-                        if(strcmp(ttt[0+b], p[a].opc) == 0 && strcmp(ttt[3+b], p[a].opc) == 0 && strcmp(ttt[6+b], p[a].opc) == 0){
-                            printf("Jogador: %s venceu!\n",p[a].player);
-                            (*playing)=100;
-                            a=10;
-                        }
-                        else{
-                            a++;
-                        }
-                    }
+void winner(char ttt[9][3], struct players p[2], int *playing) {
+    for (int a = 0; a < 2; a++) {
+        if (strcmp(ttt[0], p[a].opc) == 0 && strcmp(ttt[4], p[a].opc) == 0 && strcmp(ttt[8], p[a].opc) == 0) {
+            printf("Jogador: %s venceu!\n", p[a].player);
+            (*playing) = 100;
+            break;
+        } else if (strcmp(ttt[2], p[a].opc) == 0 && strcmp(ttt[4], p[a].opc) == 0 && strcmp(ttt[6], p[a].opc) == 0) {
+            printf("Jogador: %s venceu!\n", p[a].player);
+            (*playing) = 100;
+            break;
+        } else {
+            for (int b = 0; b < 3; b++) {
+                if (strcmp(ttt[0 + (b * 3)], p[a].opc) == 0 && strcmp(ttt[1 + (b * 3)], p[a].opc) == 0 && strcmp(ttt[2 + (b * 3)], p[a].opc) == 0) {
+                    printf("Jogador: %s venceu!\n", p[a].player);
+                    (*playing) = 100;
+                    break;
+                } else if (strcmp(ttt[0 + b], p[a].opc) == 0 && strcmp(ttt[3 + b], p[a].opc) == 0 && strcmp(ttt[6 + b], p[a].opc) == 0) {
+                    printf("Jogador: %s venceu!\n", p[a].player);
+                    (*playing) = 100;
+                    break;
                 }
             }
         }
     }
 }
+
 
 void printar(char ttt[9][3],struct players p[2]){
     
@@ -530,7 +521,6 @@ void twoPlayer(struct players p[2]){
                 else{
                     if(strcmp(p[0].opc, "o")!=0 || strcmp(p[0].opc, "O")!=0 || strcmp(p[0].opc, "x")!=0 || strcmp(p[0].opc, "O")!=0 ){
                         printf("Opcao invalida!\n");
-                        usleep(2000000);
                         erro++;
                     }
                 }
@@ -538,7 +528,6 @@ void twoPlayer(struct players p[2]){
         }
         
         char play[10];
-        usleep(20000);
         printf("\033[H\033[J");
         printf("%s: %s\n%s: %s\n\n",p[0].player,p[0].opc,p[1].player,p[1].opc);
         printf(" .| 1  | 2  | 3  |\nA | a1 | a2 | a3 |\nB | b1 | b2 | b3 |\nC | c1 | c2 | c3 |\n");
@@ -578,10 +567,10 @@ void twoPlayer(struct players p[2]){
                 }  
                
             }
-            
-            //ganhou?
-            usleep(20000);
+
             printf("\033[H\033[J");
+
+            //ganhou?
             winner(ttt,p,&playing);
            
             //print
@@ -619,7 +608,6 @@ int main() {
     else{
     if(np == 2){
         twoPlayer(p);
-        usleep(20000);
     
         
     } //fim dois jogadores
@@ -642,7 +630,6 @@ int main() {
         printf("Fim do Jogo!");
         printf("Deseja jogar novamente?\n1-Sim\n2-Nao\n");
         scanf("%d",&menu);
-        usleep(20000);
         printf("\033[H\033[J");
     }
    
